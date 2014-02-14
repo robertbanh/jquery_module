@@ -47,3 +47,10 @@
 
 })(window, jQuery, PubSub);
 
+
+$(document).ready(function() {
+
+    $('.class_x').on('click', function(e){
+        CustomModule.fetchStuff();
+    });
+});
