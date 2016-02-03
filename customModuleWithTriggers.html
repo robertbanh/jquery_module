@@ -1,0 +1,59 @@
+<html>
+<head>
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+
+<input type="button" class="btn" value="Click me!"/>
+
+<script>
+// Custom module with trigger and binding
+// Author: Robert Banh
+// Date: 2/2/16
+;(function(window, $) {
+    "use strict";
+
+    var _button = '.btn';
+   
+    // private methods
+    var _init = function () 
+    {
+        _setupEvents();
+    }
+
+    var _setupEvents = function()
+    {
+        if ($(_button).length > 0)
+        {
+            $(_button).on('click', function(e){
+                console.log('button has been clicked');
+                $(methods).trigger("rbanhClicked", [$(this).val(), 'test']);
+            });
+        }
+    }
+
+    // public methods
+    var methods = {
+        init: function(){ _init(); }
+    }
+
+    window.CustomModule = methods;
+    
+})(window, jQuery);
+
+
+// on ready
+$(function() {
+
+    CustomModule.init();
+    $(CustomModule).on('rbanhClicked', function(e, arg1, arg2){
+        console.log('rbanhClicked triggered!');
+        console.log('arg1 = ', arg1);
+        console.log('arg2 = ', arg2);
+    });
+});
+
+
+</script>
+</body>
+</html>
